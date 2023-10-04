@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import { lazy } from 'react';
+//import { lazy } from 'react';
 import SharedLayout from './SharedLayout/SharedLayout';
 import Home from 'pages/Home/Home';
 import SearchMovies from 'pages/SearchMovies/SearchMovies';
