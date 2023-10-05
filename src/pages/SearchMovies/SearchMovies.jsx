@@ -17,6 +17,8 @@ const SearchMovies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('search') ?? '';
   const refQuery = useRef(query);
+  const pageParams = searchParams.get('page') ?? '';
+  const refPage = useRef(pageParams);
 
   const getMovieList = useCallback(
     async ({ query, page }) => {
@@ -56,15 +58,10 @@ const SearchMovies = () => {
 
   useEffect(() => {
     if (refQuery.current !== '') {
-      return getMovieList({ query: refQuery.current, page });
+      getMovieList({ query: refQuery.current, page: refPage.current });
     }
-    value&&getMovieList({ query: value, page });
+    value && getMovieList({ query: value, page: page });
   }, [getMovieList, query, value, page]);
-
-  // useEffect(() => {
-  //   refQuery.current && getMovieList({ query: refQuery.current, page });
-  //   // : getMovieList({ query: query.current, page });
-  // }, [getMovieList, query, page]);
 
   return (
     <SearchMoviesStyled>

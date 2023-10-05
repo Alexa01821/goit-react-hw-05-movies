@@ -1,18 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import SearchMoviesFormStyled from './SearchMoviesFormStyled';
 import { Notify } from 'notiflix';
 import { useSearchParams } from 'react-router-dom';
 
 const SearchMoviesForm = ({ searchMovies }) => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const query = searchParams.get('search') ?? '';
+  const [, setSearchParams] = useSearchParams();
   const [searchValue, setSearchValue] = useState('');
   const page = 1;
 
   const handleChange = ({ target: { value } }) => {
-    value
-      ? setSearchParams({ search: value.toLowerCase().trim() })
-      : setSearchParams({});
+    setSearchValue(value);
   };
 
   const handleSubmit = event => {
@@ -22,13 +19,11 @@ const SearchMoviesForm = ({ searchMovies }) => {
 
     if (value === '') {
       Notify.failure('Fill in the form!');
+      setSearchParams({});
     }
-    setSearchValue(value);
+    setSearchParams({ search: value.toLowerCase().trim() });
+    searchMovies({ query: value, page });
   };
-
-  useEffect(() => {
-    searchValue && searchMovies({ query: searchValue, page });
-  }, [searchMovies, searchValue]);
 
   return (
     <SearchMoviesFormStyled onSubmit={handleSubmit}>
@@ -38,7 +33,7 @@ const SearchMoviesForm = ({ searchMovies }) => {
         name="search"
         autoComplete="off"
         autoFocus
-        value={query}
+        value={searchValue}
         placeholder="Search movies and cartoons"
         onChange={handleChange}
       />
