@@ -6,7 +6,6 @@ import { useSearchParams } from 'react-router-dom';
 const SearchMoviesForm = ({ searchMovies }) => {
   const [, setSearchParams] = useSearchParams();
   const [searchValue, setSearchValue] = useState('');
-  const page = 1;
 
   const handleChange = ({ target: { value } }) => {
     setSearchValue(value);
@@ -22,7 +21,7 @@ const SearchMoviesForm = ({ searchMovies }) => {
       setSearchParams({});
     }
     setSearchParams({ search: value.toLowerCase().trim() });
-    searchMovies({ query: value, page });
+    searchMovies(value)
   };
 
   return (

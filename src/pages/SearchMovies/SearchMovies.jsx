@@ -11,13 +11,12 @@ import { useSearchParams } from 'react-router-dom';
 const SearchMovies = () => {
   const [status, setStatus] = useState(false);
   const [searchMovieList, setSearchMovieList] = useState([]);
-  const [value, setValue] = useState();
   const [page, setPage] = useState(1);
   const [showBtn, setShowBtn] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('search') ?? '';
   const refQuery = useRef(query);
-  const pageParams = searchParams.get('page') ?? '';
+  const pageParams = searchParams.get('page') ?? '1';
   const refPage = useRef(pageParams);
 
   const getMovieList = useCallback(
@@ -39,11 +38,8 @@ const SearchMovies = () => {
     },
     [setSearchParams]
   );
-
-  const searchMovies = ({ query, page }) => {
-    setValue(query);
-    setPage(page);
-    setSearchMovieList([]);
+  const searchMovies = value => {
+    if (value !== query) setPage(1);
   };
 
   const getMoreMovie = ({ target: { textContent } }) => {
@@ -57,11 +53,8 @@ const SearchMovies = () => {
   };
 
   useEffect(() => {
-    if (refQuery.current !== '') {
-      getMovieList({ query: refQuery.current, page: refPage.current });
-    }
-    value && getMovieList({ query: value, page: page });
-  }, [getMovieList, query, value, page]);
+    query && getMovieList({ query: query, page: page });
+  }, [getMovieList, query, page]);
 
   return (
     <SearchMoviesStyled>
