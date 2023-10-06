@@ -11,7 +11,7 @@ import { useSearchParams } from 'react-router-dom';
 const SearchMovies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('search') ?? '';
-  const pageParams = searchParams.get('page') ?? '1';
+  const pageParams = Number(searchParams.get('page') ?? '1');
   const [status, setStatus] = useState(false);
   const [searchMovieList, setSearchMovieList] = useState([]);
   const [page, setPage] = useState(pageParams);
