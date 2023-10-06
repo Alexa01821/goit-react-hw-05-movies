@@ -9,15 +9,13 @@ import SearchMoviesStyled from './SearchMoviesStyled';
 import { useSearchParams } from 'react-router-dom';
 
 const SearchMovies = () => {
-  const [status, setStatus] = useState(false);
-  const [searchMovieList, setSearchMovieList] = useState([]);
-  const [page, setPage] = useState(1);
-  const [showBtn, setShowBtn] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('search') ?? '';
- // const refQuery = useRef(query);
-  // const pageParams = searchParams.get('page') ?? '1';
- // const refPage = useRef(pageParams);
+  const pageParams = searchParams.get('page') ?? '1';
+  const [status, setStatus] = useState(false);
+  const [searchMovieList, setSearchMovieList] = useState([]);
+  const [page, setPage] = useState(pageParams);
+  const [showBtn, setShowBtn] = useState(false);
 
   const getMovieList = useCallback(
     async ({ query, page }) => {
