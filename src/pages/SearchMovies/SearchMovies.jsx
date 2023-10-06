@@ -15,9 +15,9 @@ const SearchMovies = () => {
   const [showBtn, setShowBtn] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('search') ?? '';
-  const refQuery = useRef(query);
+ // const refQuery = useRef(query);
   const pageParams = searchParams.get('page') ?? '1';
-  const refPage = useRef(pageParams);
+ // const refPage = useRef(pageParams);
 
   const getMovieList = useCallback(
     async ({ query, page }) => {
