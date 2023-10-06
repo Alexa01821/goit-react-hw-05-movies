@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import SearchMoviesForm from 'components/SearchMoviesForm/SearchMoviesForm';
 import MoviesList from 'components/MoviesList/MoviesList';
 import { fetchSearchMovie } from 'services/API';
@@ -16,7 +16,7 @@ const SearchMovies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('search') ?? '';
  // const refQuery = useRef(query);
-  const pageParams = searchParams.get('page') ?? '1';
+  // const pageParams = searchParams.get('page') ?? '1';
  // const refPage = useRef(pageParams);
 
   const getMovieList = useCallback(
